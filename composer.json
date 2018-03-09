@@ -1,0 +1,10 @@
+{
+    "name": "jcluna/simple",
+    "description": "Aplicación Web Simple con PHP",
+    "autoload": {
+        "psr-4": {
+            "Simple\\": "source/Simple/",
+            "App\\": "source/Application/"
+        }
+    }
+}
