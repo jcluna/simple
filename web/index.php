@@ -10,3 +10,6 @@ require_once(dirname(__DIR__) . '/vendor/autoload.php');
 error_reporting(E_ALL);
 set_error_handler('\Simple\Handler::errors');
 set_exception_handler('\Simple\Handler::exceptions');
+
+// cargar el gestor de rutas para despachar las peticiones
+$router = new \Simple\Router;

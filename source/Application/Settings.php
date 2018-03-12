@@ -14,4 +14,11 @@ class Settings {
      */
     public $showErrors = true; 
 
+    /**
+     * Definición del controlador predeterminado
+     *
+     * @var string Corresponde al nombre de un controlador definido en [App\Controllers]
+     */
+    public $defaultController = 'Home';
+
 }
