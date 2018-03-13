@@ -6,10 +6,12 @@ session_start();
 /* cargar el autoloader de composer */
 require_once(dirname(__DIR__) . '/vendor/autoload.php');
 
-/* asociar los handlers para atrapar errores y excepciones no administrados */
-error_reporting(E_ALL);
-set_error_handler('\Simple\Handler::errors');
-set_exception_handler('\Simple\Handler::exceptions');
+/* cargar la configuración de la aplicación */
+$settings = new \App\Settings;
+
+/* asociar el gestor de errores y excepciones */
+$handler = new \Simple\Handler($settings);
 
 // cargar el gestor de rutas para despachar las peticiones
-$router = new \Simple\Router;
+$router = new \Simple\Router($settings);
+$router->dispatch(filter_input(INPUT_SERVER, 'QUERY_STRING'));
