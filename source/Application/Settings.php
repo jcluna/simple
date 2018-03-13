@@ -7,18 +7,37 @@ namespace App;
  */
 class Settings {
 
-    /**
-     * Presentar los errores no administrados
-     *
-     * @var boolean Verdadero para presentar en explorador Web, Falso para guardar en archivo log.
-     */
-    public $showErrors = true; 
+    public function __construct() {
+        // asignar la ruta para el registro de logs
+        $this->pathLogs = dirname(__DIR__) . '/logs/';
+    }
 
     /**
-     * Definición del controlador predeterminado
+     * Define si se presenta o no los errores no administrados
      *
-     * @var string Corresponde al nombre de un controlador definido en [App\Controllers]
+     * @var boolean
+     */
+    public $showErrors = false;
+
+    /**
+     * Define la ruta para el registro de logs
+     *
+     * @var string
+     */
+    public $pathLogs;
+
+    /**
+     * Define el controlador predeterminado
+     *
+     * @var string
      */
     public $defaultController = 'Home';
+
+    /**
+     * Define el namespace predeterminado
+     *
+     * @var string
+     */
+    public $defaultNamespace = 'App\Controllers\\';
 
 }

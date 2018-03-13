@@ -7,17 +7,32 @@ namespace Simple;
  */
 class Handler
 {
+    private $settings;
 
     /**
-     * Atrapar los errores PHP y convertirlos excepciones del tipo ErrorException
+     * Crear una instancia del manejador de errores y excepciones
      *
-     * @param [type] $level
-     * @param [type] $message
-     * @param [type] $file
-     * @param [type] $line
+     * @param object $settings Configuraciones de la aplicación
+     */
+    public function __construct($settings) {
+        $this->settings = $settings;
+
+        // atrapar todos los errores y excepciones no administradas
+        error_reporting(E_ALL);
+        set_error_handler([$this, 'customErrorHandler']);
+        set_exception_handler([$this, 'customExceptionHandler']);
+    }
+
+    /**
+     * Convertir los errores a excepciones del tipo ErrorException
+     *
+     * @param int $level Nivel del error
+     * @param string $message Mensaje del error
+     * @param string $file Archivo origen del error
+     * @param int $line Numéro de linea origen del error
      * @return void
      */
-    public static function errors($level, $message, $file, $line)
+    public function customErrorHandler($level, $message, $file, $line)
     {
         if (error_reporting() !== 0) {
             throw new \ErrorException($message, 0, $level, $line);
@@ -25,12 +40,12 @@ class Handler
     }
 
     /**
-     * Atraptar todas las excepciones no administradas para presentar en web o guardar en log
+     * Procesar las excepciones no administradas
      *
-     * @param Exception $exception 
+     * @param mixed $exception Excepción no administrada
      * @return void
      */
-    public static function exceptions($exception)
+    public function customExceptionHandler($exception)
     {
         // cualquier excepción con codigo de error diferente de 404 (Not Found)
         // se reporta como 500 (Internal Server Error) y cambiar la cabecera http
@@ -41,8 +56,7 @@ class Handler
         http_response_code($code);
 
         // procesar la excepción atrapada
-        $settings = new \App\Settings;
-        if ($settings->showErrors == true) {
+        if ($this->settings->showErrors == true) {
             // presentar el detalle de la excepción en el explorador web
             echo '<h1>Unhandled Exception</h1>';
             echo "<p>Exception Type: '" . get_class($exception) . "'</p>";
@@ -51,14 +65,16 @@ class Handler
             echo "<p>Thrown In '" . $exception->getFile() . "' on lines '" . $exception->getLine() . "'</p>";
         } else {
             // guardar detalle de excepción en archivo log
-            $log = dirname(__DIR__) . '/logs/' . date('Y-m-d') . '.txt';
+            $log = $this->settings->pathLogs . date('Y-m-d') . '.txt';
             ini_set('error_log', $log);
 
-            $msg = "Exception Type: '" . get_class($exception) . "' ";
+            $msg = "Exception Type: '" . get_class($exception) . "'\n";
             $msg .= "Message: '" . $exception->getMessage() . "' ";
-            $msg .= '\nStack Trace: ' . $exception->getTraceAsString();
+            $msg .= "\nStack Trace: \n" . str_replace('#', "  #", $exception->getTraceAsString());
             $msg .= "\nThrown In '" . $exception->getFile() . "' on lines '" . $exception->getLine() . "' ";
-            $msg .= "\n";
+            $msg .= "\n\n";
+            
+            // gardar en archivo log
             error_log($msg);
         }
     }
