@@ -15,6 +15,8 @@
         </title>
 
         {# definición de los CSS especificos para base.twig #}
+        <link rel="stylesheet" href="{{base_url}}assets/bootstrap/bootstrap.min.css" />
+        <link rel="stylesheet" href="{{base_url}}assets/fontawesome/css/fontawesome-all.min.css" />
         <link rel="stylesheet" href="{{base_url}}css/simple.css" />
 
         {% block base_styles %}
@@ -36,6 +38,8 @@
         {% include "Layouts/Partials/Footer.twig" %}
 
         {# definición de los JS especificos para base.twig #}
+        <script src="{{base_url}}assets/jquery/jquery.min.js"></script>
+        <script src="{{base_url}}assets/bootstrap/bootstrap.bundle.min.js"></script>
         <script src="{{base_url}}js/simple.js"></script>
 
         {% block base_scripts %}
