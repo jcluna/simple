@@ -2,11 +2,19 @@
 
 namespace Simple\Mvc;
 
+use Simple\Mvc\View;
+
 /**
  * Controlador base del sistema
  */
 class Controller
 {
+    /**
+     * Configuraciones de la aplicación
+     *
+     * @var object
+     */
+    public $settings;
 
     /**
      * Constructor del controlador base
@@ -14,6 +22,17 @@ class Controller
     public function __construct()
     {
         // implementar en herencia
+    }
+
+    /**
+     * Cargar una vista
+     *
+     * @param string $name Nombre de la vista
+     * @param array $vars Variables para la vista
+     * @return void
+     */
+    public function view($name, $vars = []) {
+        View::template($name, $vars, $this->settings);
     }
 
     /**

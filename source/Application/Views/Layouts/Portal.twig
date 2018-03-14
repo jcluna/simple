@@ -1,0 +1,21 @@
+{% extends "Layouts/Base.twig" %}
+
+{% block base_styles %}
+    {% block styles %}
+        {# sobrescribir base_styles por style #}
+    {% endblock styles %}
+{% endblock base_styles %}
+
+{% block base_navbar %}
+    {% block navbar %}
+        {# siempre presentar la barra de navegación para portal #}
+        {% include "Layouts/Partials/Navbar.twig" %}
+    {% endblock navbar %}
+{% endblock base_navbar %}
+
+{% block base_content %}
+    {% block content %}
+        {# sobrescribir base_scripts por scripts #}
+    {% endblock content %}
+{% endblock base_content %}
+

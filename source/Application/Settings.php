@@ -36,11 +36,33 @@ class Settings {
     public $defaultNamespace = 'App\Controllers\\';
 
     /**
+     * Define la ruta para las vistas
+     *
+     * @var string
+     */
+    public $pathViews;
+
+    /**
+     * Nombre de marca para la aplicación
+     *
+     * @var string
+     */
+    public $appBrandName = 'Simple';
+
+    /**
+     * URL base de la aplicación
+     *
+     * @var string
+     */
+    public $appBaseUrl = '/simple/';
+
+    /**
      * Crear una instancia del tipo Settings
      */
     public function __construct() {
         // asignar la ruta para el registro de logs
         $this->pathLogs = dirname(__DIR__) . '/logs/';
+        $this->pathViews = dirname(__DIR__) . '/Application/Views';
     }
 
 }

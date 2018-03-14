@@ -6,5 +6,8 @@
             "Simple\\": "source/Simple/",
             "App\\": "source/Application/"
         }
+    },
+    "require": {
+        "twig/twig": "2.4"
     }
 }

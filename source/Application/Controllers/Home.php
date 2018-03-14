@@ -15,7 +15,8 @@ class Home extends Controller {
      * @return void
      */
     public function indexAction() {
-        echo 'Home | Index';
+        // cargar la vista Index para Home
+        $this->view('Home/Index.twig');
     }
 
 }

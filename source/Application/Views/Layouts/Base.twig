@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+        <title>
+
+            {{brand_name}}
+            {% block page_title %}
+                {# aquí se define el titulo de la página #}
+            {% endblock page_title %}
+
+        </title>
+
+        {# definición de los CSS especificos para base.twig #}
+        <link rel="stylesheet" href="{{base_url}}css/simple.css" />
+
+        {% block base_styles %}
+            {# aquí se define el CSS adicional #}
+        {% endblock base_styles %}
+
+    </head>
+    <body>
+
+        {% block base_navbar %}
+            {# aquí se define la barra de navegación #}
+        {% endblock base_navbar %}
+
+        {% block base_content %}
+            {# aquí se define el contenido de la página #}
+        {% endblock base_content %}
+
+        {# para cualquier layout que herede de base.twig presentara el footer #}
+        {% include "Layouts/Partials/Footer.twig" %}
+
+        {# definición de los JS especificos para base.twig #}
+        <script src="{{base_url}}js/simple.js"></script>
+
+        {% block base_scripts %}
+            {# aquí se define el JS adicional #}
+        {% endblock base_scripts %}
+
+    </body>
+</html>

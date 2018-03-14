@@ -145,6 +145,9 @@ class Router {
                 // el controlador existe, se crea objeto
                 $obj = new $controller();
 
+                // asociar las configuraciones al controlador
+                $obj->settings = $this->settings;
+
                 // identificar la acción a ejecutar
                 $action = $this->params['action'];
                 $action = Strings::toCamelCase($action);
